@@ -3,6 +3,8 @@ const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const tweetbank = require('./tweetbank.js')
 const app = express();
+const routes = require('./routes');
+
 
 var locals = {
   title: 'An Example',
@@ -24,22 +26,14 @@ const people = [{name: 'Full'}, {name : 'Stacker'}, {name: 'Son'}];
 app.engine('html', nunjucks.render);
 app.set('view engine', 'html' );
 
-
-
 app.use(function(req, res, next){
   console.log(req.method, req.path)
 
-  next()
+  next();
 })
 
-app.get('/', function(req,res){
-  res.render('index', {title: 'Hall of Fame', people: locals.people})
-})
-
-
-app.get('/index.html', function (req, res) {
-  res.send('Get some news!')
-})
+app.use('/', routes)
+app.use('/views', express.static('public'));
 
 
 
