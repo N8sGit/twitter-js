@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
+const tweetbank = require('./tweetbank.js')
 const app = express();
 
 var locals = {
@@ -10,6 +11,7 @@ var locals = {
             { name: 'Hermione'}
           ]
 }
+
 nunjucks.configure('views', {
   autoescape: true,
   noCache: true
